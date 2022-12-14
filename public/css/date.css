@@ -1,0 +1,16 @@
+.calendar td,th{
+    text-align: center !important;
+    padding: 12px 20px  !important;
+    font-size: 14px !important;
+}
+.datepicker table tr td.disabled,
+.datepicker table tr td.disabled:hover {
+    color: rgb(192, 192, 192) !important;
+   
+    height: 45px !important;
+    width: 20px !important;
+    cursor: not-allowed !important;
+    border-radius: 50% !important;
+    background:rgb(229, 228, 226) !important;
+    text-decoration: line-through !important;
+}
