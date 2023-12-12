@@ -13,9 +13,8 @@ use Illuminate\Support\Str;
 class RoomController extends Controller
 {
     public function index()
-    {
-        $room = Room::oldest()->paginate(5);
-        return view ('admin.room.index', compact('room'))->with('i', (request()->input('page', 1)-1)*5);
+    { $room = Room::get();
+        return view ('admin.room.index', compact('room'))->with('i');
     }
     public function create()
     {
@@ -38,11 +37,21 @@ class RoomController extends Controller
             $room->profile = $filename;
         }
         $room->slug = Str::slug(Str::random(5).$data['RoomNo'].Str::random(5));
+        
+        if($request->hasfile("images")){
+            $files=$request->file("images");
+            foreach($files as $file){
+                $imageName=time().'_'.$file->getClientOriginalName();
+                $file->move('uploads/room/',$imageName);
+                $room->images = $filename;
+
+            }
+
+        }
         $room->save();
         
-            
-            return redirect('admin/view-room')->with('success', 'Room Added Successfully');
-    
+        return redirect('admin/view-room')->with('success', 'Room Added Successfully');
+        
 
     }
 

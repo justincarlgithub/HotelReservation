@@ -24,7 +24,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
               <h6 class="text-primary fw-bold mb-0 text-capitalize">
                 {{$comments->lastname}}, {{$comments->firstname}}
-                <span class="text-dark ms-2">{{$comments->description}}</span>
+                <span class="text-dark ms-2">{{$comments->Description}}</span>
               </h6>
               <p class="mb-0">{{$comments->updated_at}}</p>
             </div>
@@ -34,8 +34,10 @@
                 <a href="#!" class="button" class="link-grey" onclick="myFunctiona()">Edit</a> 
               </p>
               <div class="d-flex flex-row">
-                <i class="fas fa-star text-warning me-2"></i>
-                <i class="far fa-check-circle" style="color: #aaa;"></i>
+                @for($i=1; $i<=$comments->Score; $i++) 
+                <span><i class="fa fa-star text-warning"></i></span>
+                @endfor
+               
               </div>
              
             </div>
@@ -44,7 +46,7 @@
                 @csrf
                 @method('put')
                
-                <textarea class="col-12 shadow" name="comment">{{$comments->description}}  </textarea>
+                <textarea class="col-12 shadow" name="comment">{{$comments->Description}}  </textarea>
                 <br><br>
                 <button class="btn btn-end btn-info ">Save</button>
                 </form>

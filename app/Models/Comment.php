@@ -14,7 +14,8 @@ class Comment extends Model
         'slug',
         'user_id',
         'reservation_id',
-        'description'
+        'description',
+        'star_rating'
     ];
 
     public function roomresevation()
@@ -23,8 +24,8 @@ class Comment extends Model
     }
 
     public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-    
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+     
 }

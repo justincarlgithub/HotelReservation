@@ -182,7 +182,7 @@
     </div>
   </div>
 
-
+ 
 <!-- Modal -->
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
@@ -210,6 +210,37 @@
   </div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.nl.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet"/>
+<script>
+  $('#calendar').datepicker({
+  language: "en", 
+  todayHighlight: true,
+    format: 'yyyy-mm-dd',
+    startDate: '0d',
+});
+ 
+</script>
+<style>
+  .calendar td,th{
+    text-align: center !important;
+    padding: 12px 20px  !important;
+    font-size: 14px !important;
+}
+.datepicker table tr td.disabled,
+.datepicker table tr td.disabled:hover {
+    color: rgb(192, 192, 192) !important;
+   
+    height: 45px !important;
+    width: 20px !important;
+    cursor: not-allowed !important;
+    border-radius: 50% !important;
+    background:rgb(229, 228, 226) !important;
+    text-decoration: line-through !important;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

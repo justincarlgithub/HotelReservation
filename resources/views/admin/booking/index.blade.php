@@ -42,7 +42,7 @@
                           @if($value->check_in == $todayDate = date("Y-m-d")) 
                           <center><span style="color:red">----------------</span>&nbsp;&nbsp;&nbsp;<a href="{{url('admin/updatestatus/'.$value->id)}}" onclick="confirmation(event)"><i class="fa-solid fa-pen-to-square"></i></center> 
                           @elseif ($value->check_in < $todayDate = date("Y-m-d"))
-                          <center><span style="color: red">REDTAGGED</span></center>
+                          <center><button class="btn btn-danger"><a href="{{url('admin/update-redtagged/'.$value->id)}}">REDTAGGED</a></center></button>
                            @else 
                           <center><span style="color:red">-----------------------</span></center>
                           @endif 

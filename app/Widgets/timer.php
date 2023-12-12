@@ -32,5 +32,7 @@ class timer extends AbstractWidget
             'config' => $this->config,
             'room' => $room
         ]);
+
+         
     }
 }

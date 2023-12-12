@@ -1,89 +1,121 @@
-
-<style>
-    .link-grey { color: #aaa; } .link-grey:hover { color: #00913b; }
-</style>
 @include('admin.sidebar')
-<div id="layoutSidenav_content">
-    <main>
-        <br>
-<div class="container-fluid px-4">
-    <div class="card">
-      <div class="card-header">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h1 class="text-dark mb-0">Comments</h1>
-          <div class="card">
-            <div class="card-body p-2 d-flex align-items-center">
-              <h6 class="text-primary fw-bold small mb-0 me-1">Comments     "ON"</h6>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked />
-                <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-body shadow" style="overflow-x: auto;">
-        <section style="background-color: #f7f6f6;">
-          
-                
-                @foreach ($comments as $comment )
-                <div class="card mb-3">
-                  <div class="card-body">
-                    <div class="d-flex flex-start">
-                      <img class="rounded-circle shadow-1-strong me-3"
-                           src="{{asset('/storage/images/'.$comment->profile_image)}}" alt="profile_image" 
-                      alt="avatar" width="40"
-                        height="40" />
-                      <div class="w-100">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                          <h6 class="text-primary fw-bold mb-0 text-capitalize">
-                            {{$comment->lastname}}, {{$comment->firstname}}
-                            <span class="text-dark ms-2">{{$comment->description}}</span>
-                          </h6>
-                          <p class="mb-0">{{$comment->created_at}}</p>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                          <p class="small mb-0" style="color: #aaa;">
-                            <a href="#!" class="link-grey">Remove</a> •
-                            <a href="#!" class="link-grey">Reply</a> 
-                          </p>
-                          <div class="d-flex flex-row">
-                            <i class="fas fa-star text-warning me-2"></i>
-                            <i class="far fa-check-circle" style="color: #aaa;"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                @endforeach
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-      
-   <script>
-            function confirmation1(ev) {
-                ev.preventDefault();
-                var urlToRedirect = ev.currentTarget.getAttribute('href')
-                console.log(urlToRedirect);
-                swal({
-                    title: "Are you sure to delete this booking?",
-                    text: "Action can't be undone!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode:true,
-                })
-                .then((willCancel)=> {
-                    if(willCancel) {
-                        window.location.href = urlToRedirect;
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Dashboard</h1>
                         
-                    }
-                });
-            }
+                        <div class="row">
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Bookings</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{$count}}</div>
+                                              
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                   Income</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"> 
+                                                  @foreach ($tsales as $dat) 
+                                                  {{ $dat->sales ? $dat->sales : 0 }}
+                                              @endforeach</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-peso-sign fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Occupied Room
+                                                </div>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                         {{ $roomoccupied }}
+                                                    </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div class="col">
+                                                        <div class="progress progress-sm mr-2">
+                                                            <div class="progress-bar bg-info" role="progressbar"
+                                                                style="width: 50%" aria-valuenow="10" aria-valuemin="0"
+                                                                aria-valuemax="100"></div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                          <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                      </div>
+                                                    </div>
+                                               
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4 shadow h-100">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between px-3" style="width: 100%;">
+                                        <h6 class="m-0 font-weight-bold text-secondary"> <i class="fas fa-chart-area me-1"></i>Reservations Made</h6>
+                                        <div class="btn-group">
+                                          <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Analysis
+                                          </button>
+                                          <ul class="dropdown-menu">
+                                            <button class="btn active" onclick="changeData(0)" >This Week</button>
+                                            <button class="btn" onclick="changeData(1)">This Month</button>
+                                            <button class="btn" onclick="changeData(2)">This Year</button>
+                                          </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-body"><canvas id="barChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                   </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script>
+var dataObjects = [
+      {
+        _label: {!! json_encode($labels) !!},
+        data:  {!! json_encode($data) !!},
+        _title: 'Daily',
+      }
+    ]
+    
         </script>
-@include('partials.footer')
-        
+        @include('partials.footer')
+       

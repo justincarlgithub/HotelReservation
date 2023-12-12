@@ -19,7 +19,7 @@ class Roomreservation extends Model
         'check_in',
         'check_out'
     ];
-
+ 
     public function user(){
         return $this ->belongsTo(User::class);
     }
@@ -30,8 +30,9 @@ class Roomreservation extends Model
     {
         return $this->hasOne(Comment::class);
     }
-   
-   
-    
-   
+
+    public function getRoomreservationCountAttribute()
+    {
+        return $this->roomreservation()->count();
+    } 
 }

@@ -13,10 +13,18 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Hash;
+use SentimentAnalysis;
+
 
 
 class UserAccountController extends Controller
 {
+   
+       
+
+        // returns true or false
+      
+
     public function account(Request $request){
        
         $recent = Roomreservation::where('user_id', Auth::id())
@@ -28,18 +36,26 @@ class UserAccountController extends Controller
                     ->join('users', 'comment.user_id', '=', 'users.id') 
                     ->where('comment.user_id', Auth::id())
                     ->paginate(1, ['*']);  
+      
+
+        $countComment = Comment::join('roomreservation','comment.roomreservation_id', 'roomreservation.id')
+                    ->join('users', 'comment.user_id', 'users.id')
+                    ->select('comment.*', 'roomreservation.id', 'users.firstname', 'users.profile_image', 'users.lastname')
+                    ->where('comment.user_id', Auth::id())
+                    ->get();
         
-        
-       
-        
-                    $booking = Roomreservation::with('comment')->where('user_id', Auth::id())
+        $booking = Roomreservation::with('comment')->where('user_id', Auth::id())
                     ->where(function($query) {
                 $query->where('status','1')
                     ->orWhere('status','2');})
                     
                         ->paginate(1, ['*'], 'booking');;
-
-                
+        $count = User::join('roomreservation','users.id', 'roomreservation.user_id')
+                        ->select('users.*', 'roomreservation.user_id', 'roomreservation.check_in', 'roomreservation.status')
+                        ->where('roomreservation.status', '4')
+                        ->get()
+                        ->countBy('user_id');
+                    
         
         $exist = DB::table('comment')
                 ->join('roomreservation', 'comment.roomreservation_id', '=', 'roomreservation.id')
@@ -49,10 +65,10 @@ class UserAccountController extends Controller
                 $arr = Roomreservation::where('user_id', auth()->user()->id)->pluck('id')->toArray();
                 $comments = Comment::whereIn('roomreservation_id', $arr)->latest()->get();
 
-              
+
               
       
-       return view ('index.userindex', compact('recent', 'booking', 'comment', 'exist', 'comments'))->with('i', (request()->input('page', 1)-1)*1);
+       return view ('index.userindex', compact('recent', 'booking', 'comment', 'exist', 'comments', 'count', 'countComment'))->with('i', (request()->input('page', 1)-1)*1);
     }
 
     public function comments()
@@ -152,13 +168,15 @@ class UserAccountController extends Controller
         $data = $request->validate([
            
             'reserve_id' => 'required',
-            'description' => 'required','string','max:200']);
+            'description' => 'required','string','max:200',
+            'rating' => 'required']);
 
         $comment = new comment;
         $comment->user_id = Auth::id();
-        $comment->reservation_id = $data['reserve_id'];
+        $comment->roomreservation_id = $data['reserve_id'];
         $comment->description = $data['description'];
         $comment->slug = Str::slug(Str::random(5));
+        $comment->star_rating = $request->rating;
         $comment->save();
         return redirect('account/ac')->with('success', 'Commented Successfully!'); 
     }
@@ -197,6 +215,24 @@ class UserAccountController extends Controller
         return view ('admin.comment.index', compact( 'comments'));
 
        
+    }
+
+    public function status($id){
+
+        try {
+
+            $code = 1;
+            $update_status = User::whereId($id)->update([
+                'banned' =>  $code
+            ]);
+            if( $update_status)
+            {
+                return back()->with('success', 'Blocked successfully!');
+            }
+            return back()->with('error', 'Fail to Block');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
     
 }

@@ -8,7 +8,7 @@
       <div class="card-header">
         <h1>Staffs
         </h1></div>
-      
+     
       <div class="table-responsive card-body shadow">
         <table class="table table-bordered" id="example2">
           <thead>
@@ -18,7 +18,7 @@
               <th>Lastname</th>
               <th>Email</th>
               @if ($warn > 0)
-              <th>Email</th>
+              <th>Status</th>
               @endif
               
             
@@ -34,18 +34,24 @@
                 <td>{{ $value->lastname}}</td>
                 <td>{{ $value->email}}</td>
                 @if ($warn>0)
-                
                 <td>
-                  {{$warn2}}
-                  @if($value->id)
-                   
-                      <p>warning1</p>
-                  
-                      <p>warn2</p>
-                    @else
-                       <p>warn3</p>
-                    @endif
-                  
+                  @foreach ($count as $countUserId => $countStatus)
+                  @if($countUserId == $value->id)
+                       @if($countStatus ==1)
+                            <span style="color: red"><b>FIRST</b> Warning</span>
+                          @elseif($countStatus ==2)
+                            <span style="color: red"><b>SECOND</b> Warning</span>
+                          @else
+                             @if ($value->banned == 1)
+                             <button class="btn btn-danger" style="pointer-events: none;">Banned</button>
+                             @else
+                             <a href="{{url('admin/ban-user/'. $value->id)}}" class="btn btn-danger">Block User</a>
+                             @endif
+                           
+                      @endif
+                  @endif
+                    
+                  @endforeach
                 </td>
                 @endif
             </tr>

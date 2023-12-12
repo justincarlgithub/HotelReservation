@@ -17,6 +17,20 @@
                 <div class="float-sm-right">
                   <a class="btn mb-1" style="width:150px; background-color:#060e4d; color:#fff;"  href="{{ route('change-profile', ['id' => Auth::id()]) }}">{{ __('Update') }}</a>
                   <a class="btn mb-1" style="width:150px; background-color:#060e4d; color:#fff;" href="">Change Password</a>
+                  @foreach ($count as $countUserId => $countStatus)
+                  @if($countUserId == Auth::id())
+                  
+                          @if($countStatus ==1)
+                            <h4>Account Status: <span style="color: red"><b>FIRST</b> Warning</span> </h4>
+                          
+                            <h6>**3warnings results to account suspension**</h6>
+                          @elseif($countStatus ==2)
+                             <h4>Account Status:<span style="color: red"><b>SECOND</b> Warning</span> </h4>
+                            
+                           <h6>**3warnings results to account suspension**</h6>
+                           @endif
+                  @endif
+                  @endforeach
                 </div>
               </div>
             </div>

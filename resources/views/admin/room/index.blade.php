@@ -7,7 +7,12 @@
       <div class="card-header">
         <h1>Rooms<a href ="{{ url ('admin/add-room')}}" class = "btn btn-primary btn sm text-white float-end mdi mdi-plus-circle-outline menu-icon"> Add Room</a></h1>
       </div>
-
+      @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-block">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+              <strong>{{ $message }}</strong>
+      </div>
+  @endif
         <div class="table-responsive card-body shadow">
           <table class="table" id="example">
             <thead>

@@ -50,5 +50,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Roomreservation::class);
     }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
    
 }

@@ -3,7 +3,7 @@
           <div class="container">
           <h1 class="display-4 fw-bold text-center">Available Room For Today</h1>
           <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3" >
-            @if(!empty($room) && $room->count())
+            @if(!empty($roomreservation) && $roomreservation->count())
     @foreach($room as $key => $value)
     <div class="col">
       <div class="card shadow-sm" style="border-radius: 25px;"> 

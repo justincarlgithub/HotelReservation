@@ -169,4 +169,15 @@ class BookingController extends Controller
         
         
     }
+    public function tag($id) 
+    {
+        $getStatus = Roomreservation::select('status')->where('id',$id)->first();
+        $status = 4;
+        
+        Roomreservation::where('id',$id)->update(['status'=>$status]);
+         return back();
+
+        
+        
+    }
 }

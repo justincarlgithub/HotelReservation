@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                   <label>Room Profile: </label>
-                  <input type ="file" name = "profile" class = "form-control @error('profile') is-invalid @enderror"value="{{ old('profile') }}" autofocus>
+                  <input type ="file" name = "profile" accept="image/*" class = "form-control @error('profile') is-invalid @enderror"value="{{ old('profile') }}" autofocus>
                   @error('profile')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -80,6 +80,17 @@
               </span>
                @enderror
               </div>
+
+              <div class="col-md-6 mb-3">
+                <label>Room Images</label>
+                <input type="file" name="images[]" accept="image/*"  class = "form-control @error('file[]') is-invalid @enderror" multiple>
+                @error('file[]')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+               @enderror
+              </div>
+
 
               <div class="col-md-12 mb-3">
                 <button type = "submit" class="btn btn-primary float-end mdi mdi-upload menu-icon">Save</button>

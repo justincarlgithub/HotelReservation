@@ -13,6 +13,7 @@ class IndexController extends Controller
    
     public function index()
     {
+        
         return view('user.index') ;
     }
     public function about()
@@ -29,9 +30,22 @@ class IndexController extends Controller
     }
     public function room()
     {
-        $roomreservation = Roomreservation::with(['room'])->where('roomreservation.check_in', '!=', Carbon::today())->get();
+        $todayDate = Carbon::now('GMT+8')->format('Y-m-d');
+        $roomreservation = DB::table('room')
+                        ->leftJoin('roomreservation',  'room.id', '=', 'roomreservation.room_id' )
+                        ->select('room.*', 'roomreservation.check_in', 'roomreservation.check_out')
+
+                        ->where(function ($query) use ($todayDate) {
+                            $query->where(function ($q) use ($todayDate) {
+                                $q->where('check_in', '>=', $todayDate)
+                                    ->where('check_out', '<=', $todayDate);
+                                $q->orWhere('check_in', '<', $todayDate)
+                                  ->where('check_out', '>=', $todayDate);
+                            });
+                        })
+                        ->groupBy('id')
+                           ->get();
         $room = Room::all();
-        
         return view('index.room', compact('roomreservation', 'room'));
     }
     public function roomdisplay($id)
@@ -53,8 +67,10 @@ class IndexController extends Controller
         $comments = DB::table('comment')
         ->join('users', 'comment.user_id', '=', 'users.id')
         ->select('comment.*', 'users.*')
+        ->where('comment.Analysis', '=', 'Positive')
         ->orderBy('comment.created_at', 'ASC')
         ->get();
+
         return view('index.testimonials', compact ('comments'));
 
       

@@ -2,6 +2,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
        
         <script src="{{asset('js/chart-bar-demo.js')}}"></script>
+        <script src="{{asset('js/chart-bar-comment.js')}}"></script>
         <script src="{{asset('js/chart-area-demo.js')}}"></script>
         <script src="{{asset('js/datatables-simple-demo.js')}}"></script>
         <script src="{{asset('js/jquery.min.js')}}" type="text/javascript"></script>
@@ -30,8 +31,6 @@
 <script> 
    
  </script>
- <script src="{{asset('js/date.js')}}"></script>
- <link href="{{asset('css/date.css')}}" rel="stylesheet">
- 
+
     </body>
 </html>

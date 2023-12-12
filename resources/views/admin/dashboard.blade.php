@@ -149,6 +149,7 @@ var dataObjectsline = [
         labelline: {!! json_encode($ldate) !!},
         dataline:  {!! json_encode($dincome) !!},
         _title: 'Daily',
+       
       },
       {
         labelline: {!! json_encode($lweek) !!},
@@ -163,7 +164,7 @@ var dataObjectsline = [
     ]
     
         </script>
-        
-
+        <script> Console.log($ldate)</script>
+        <script> Console.log($labels)</script>
         @include('partials.footer')
        

@@ -55,23 +55,16 @@
         <section id="testimonials"style="background-color: #060e4d; color:#fff; padding: bottom 20px;" class="py-5 px-5">
             <h1 class="display-4 fw-bold text-center" style="padding-top: 20px;">Testimonials</h1>
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" >
-              <div class="carousel-inner">
-                <div class="carousel-item active">
+             <div class="carousel-inner">
+              @foreach($comments as $key => $comment)
+                <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
                   <img src="uploads\profile\default.png" class="w-22 p-3 position-relative top-0 start-50 translate-middle-x" alt="..." style="width: 150px;">
-                  <h1 class="text-center">Qwerty</h1>
-                  <p class="text-center fs-5" >&#34;<span class="text-center">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</span>&#34;</p>
+                  <h1 class="text-center"></h1>
+                  <p class="text-center fs-5" >&#34;<span class="text-center">{{$comment->Description}}</span>&#34;</p>
                 </div>
-                <div class="carousel-item">
-                  <img src="uploads\profile\default.png" class="w-22 p-3 position-relative top-0 start-50 translate-middle-x" alt="..."style="width: 150px;">
-                  <h1 class="text-center">Qwerty</h1>
-                  <p class="text-center fs-5">&#34;<span class="text-center">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</span>&#34;<</p>
-                </div>
-                <div class="carousel-item">
-                  <img src="uploads\profile\default.png" class="w-22 p-3 position-relative top-0 start-50 translate-middle-x" alt="..."style="width: 150px;">
-                  <h1 class="text-center">Qwerty</h1>
-                  <p class="text-center fs-5">&#34;<span class="text-center">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. </span>&#34;<</p>
-                </div>
-              </div>
+                @endforeach
+              </div>  
+              
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>

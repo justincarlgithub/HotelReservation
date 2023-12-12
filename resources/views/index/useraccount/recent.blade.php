@@ -25,15 +25,14 @@
         <br><br>
         <br><br>
         <a href="{{url ('reservation/booking/'.$value->id) }}" class="btn" style=" background-color:#060e4d; color:#fff;">Edit Booking</a> 
-
-      <?php $date = date('Y-m-d');
-      $newdate = date('Y-m-d', strtotime($date.' + 4 days')); ?>
-      @if($value->check_in <= $newdate )
-            <button class="btn btn-danger" disabled>Cancel Booking</button>
-            <p style="color: red">Cancelation of booking 5 days prior to check in date is not possible</p>
-      @else 
-            <a type="button" href="{{url ('reservation/delete/'.$value->id) }}" class="btn btn-danger" onclick="confirm(event)">Cancel Booking</a>
-      @endif 
+            <?php $date = date('Y-m-d');
+            $newdate = date('Y-m-d', strtotime($date.' + 4 days')); ?>
+                @if($value->check_in <= $newdate )
+                        <button class="btn btn-danger" disabled>Cancel Booking</button>
+                        <p style="color: red">Cancelation of booking 5 days prior to check in date is not possible</p>
+                @else 
+                        <a type="button" href="{{url ('reservation/delete/'.$value->id) }}" class="btn btn-danger" onclick="confirm(event)">Cancel Booking</a>
+                 @endif 
      </div>
 </div>
 @endforeach

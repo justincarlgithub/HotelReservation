@@ -163,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Arrilot\Widgets\ServiceProvider::class,
-
         /*
          * Package Service Providers...
          */

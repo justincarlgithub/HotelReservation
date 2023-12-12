@@ -13,7 +13,7 @@ class CreateRoomreservation extends Migration
      */
     public function up()
     {
-        Schema::create('roomreservation', function (Blueprint $table) {
+        Schema::create('room', function (Blueprint $table) {
             $table->id();
             $table->string('RoomNo');
             $table->string('slug');
@@ -34,6 +34,6 @@ class CreateRoomreservation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roomreservation');
+        Schema::dropIfExists('room');
     }
 }

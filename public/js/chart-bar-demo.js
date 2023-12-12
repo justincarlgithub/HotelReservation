@@ -47,7 +47,7 @@ var chart= new Chart(cty, {
     },
     title: {
       display: true,
-      text: dataObjectsline[0]._title,
+      text: dataObjects[0]._title,
       font: {
         size: 70,
       }

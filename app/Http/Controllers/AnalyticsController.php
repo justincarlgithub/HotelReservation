@@ -75,7 +75,6 @@ class AnalyticsController extends Controller
             $ldate[] = $income['day_name'];
             $dincome[] = $income['income'];
             }   
-        
        $incomes1 = Roomreservation::select(\DB::raw("sum(total) as income, 0"), \DB::raw("WEEK(created_at) as week"))
                   ->where('status', '2')
                   ->whereYear('updated_at', date('Y'))

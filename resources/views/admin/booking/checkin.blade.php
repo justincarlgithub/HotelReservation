@@ -59,7 +59,7 @@
                         <center><span style="color:green">Checkout</span></center>
                         @endif
                         @if($value->status==1)
-                        <center><span style="color:red"> <a href="{{ url('confirm-password/'.$value->id) }}">Checkin</a></center>
+                        <center><span style="color:red"> <a>Checkin</a></center>
                         @endif
                       </td>
                       <td>&#8369; {{number_format($value->total)}}</td>
